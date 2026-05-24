@@ -27,7 +27,7 @@ import { cutTypeService } from "@/services/cut-type-service";
 import { packagingService } from "@/services/packaging-service";
 import { categoryService } from "@/services/category-service";
 import { Product, ProductDetail, ProductCategory, CreateProductPayload, UpdateProductPayload } from "@/types/product";
-import { Subcategory } from "@/types/category";
+import { Category, Subcategory } from "@/types/category";
 import { CutType } from "@/types/cut-type";
 import { PackagingType } from "@/types/packaging";
 import { Badge } from "@/components/ui/badge";
