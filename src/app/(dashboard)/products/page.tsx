@@ -293,8 +293,8 @@ function EditProductModal({ open, onOpenChange, product, onSave, saving, categor
       description,
       notes_enabled: notesEnabled,
       status,
-      cut_type_ids: selectedCutType ? Number(selectedCutType) : undefined,
-      packaging_type_ids: selectedPackagingType ? Number(selectedPackagingType) : undefined,
+      cut_type_ids: selectedCutType ? [Number(selectedCutType)] : undefined,
+      packaging_type_ids: selectedPackagingType ? [Number(selectedPackagingType)] : undefined,
       ...(image && { image }),
     });
   };

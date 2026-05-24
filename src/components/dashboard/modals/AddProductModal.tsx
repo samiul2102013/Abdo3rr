@@ -105,8 +105,8 @@ export function AddProductModal({ open, onOpenChange, onSubmit, submitting = fal
       image,
       notes_enabled: notesEnabled,
       status,
-      cut_type_ids: selectedCutType ? Number(selectedCutType) : undefined,
-      packaging_type_ids: selectedPackagingType ? Number(selectedPackagingType) : undefined,
+      cut_type_ids: selectedCutType ? [Number(selectedCutType)] : undefined,
+      packaging_type_ids: selectedPackagingType ? [Number(selectedPackagingType)] : undefined,
     };
     onSubmit?.(payload);
   };
