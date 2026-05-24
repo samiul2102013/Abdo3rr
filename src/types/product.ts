@@ -5,6 +5,7 @@ export interface ProductCategory {
   image: string | null;
   item_count: number;
   status: boolean;
+  subcategories?: any[];
   created_at: string;
   updated_at: string;
 }

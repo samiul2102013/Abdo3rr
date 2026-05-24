@@ -21,7 +21,7 @@ export const productApi = {
     Object.entries(payload).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         if (Array.isArray(value)) {
-          formData.append(key, JSON.stringify(value));
+          value.forEach((v) => formData.append(key, String(v)));
         } else if (value instanceof File) {
           formData.append(key, value);
         } else {
@@ -37,7 +37,7 @@ export const productApi = {
     Object.entries(payload).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
         if (Array.isArray(value)) {
-          formData.append(key, JSON.stringify(value));
+          value.forEach((v) => formData.append(key, String(v)));
         } else if (value instanceof File) {
           formData.append(key, value);
         } else {

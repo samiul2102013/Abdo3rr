@@ -198,7 +198,7 @@ function EditProductModal({ open, onOpenChange, product, onSave, saving, categor
   product: Product | null;
   onSave: (id: number, payload: UpdateProductPayload) => void;
   saving: boolean;
-  categories: Category[];
+  categories: ProductCategory[];
 }) {
   const [name, setName] = useState("");
   const [categoryId, setCategoryId] = useState("");
