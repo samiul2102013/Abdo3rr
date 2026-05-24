@@ -1,3 +1,5 @@
+import { Subcategory } from "./category";
+
 export interface ProductCategory {
   id: number;
   name: string;
@@ -5,7 +7,7 @@ export interface ProductCategory {
   image: string | null;
   item_count: number;
   status: boolean;
-  subcategories?: any[];
+  subcategories: Subcategory[];
   created_at: string;
   updated_at: string;
 }
