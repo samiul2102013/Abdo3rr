@@ -1,11 +1,11 @@
 export interface User {
-  id: number;
+  id?: number;
   email: string;
-  name: string | null;
-  phone: string | null;
+  name?: string | null;
+  phone?: string | null;
   profile_picture?: string | null;
-  is_staff: boolean;
-  is_superuser: boolean;
+  is_staff?: boolean;
+  is_superuser?: boolean;
 }
 
 export interface ProfileUpdatePayload {

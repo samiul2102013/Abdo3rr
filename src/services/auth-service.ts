@@ -12,8 +12,12 @@ export const authService = {
 
   async updateProfile(payload: ProfileUpdatePayload): Promise<ApiResponse<User>> {
     const formData = new FormData();
-    if (payload.name) formData.append("name", payload.name);
-    if (payload.phone) formData.append("phone", payload.phone);
+    if (payload.name !== undefined && payload.name !== null) {
+      formData.append("name", payload.name);
+    }
+    if (payload.phone !== undefined && payload.phone !== null) {
+      formData.append("phone", payload.phone);
+    }
     if (payload.profile_picture) {
       formData.append("profile_picture", payload.profile_picture);
     }

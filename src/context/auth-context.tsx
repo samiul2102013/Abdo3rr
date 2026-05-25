@@ -33,8 +33,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           // If we have a token, try to fetch the latest profile
           const response = await authService.getProfile();
           if (response.success && response.data) {
-            setUser(response.data);
-            localStorage.setItem("admin_user", JSON.stringify(response.data));
+            const existingUser = storedUser ? JSON.parse(storedUser) : {};
+            const mergedUser = { ...existingUser, ...response.data };
+            setUser(mergedUser);
+            localStorage.setItem("admin_user", JSON.stringify(mergedUser));
           } else if (storedUser) {
             // Fallback to stored user if API fails but token exists
             setUser(JSON.parse(storedUser));
@@ -52,8 +54,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const updateUser = (newUser: User) => {
-    localStorage.setItem("admin_user", JSON.stringify(newUser));
-    setUser(newUser);
+    setUser(prev => {
+      const merged = { ...prev, ...newUser };
+      localStorage.setItem("admin_user", JSON.stringify(merged));
+      return merged;
+    });
   };
 
   const refreshProfile = async () => {
