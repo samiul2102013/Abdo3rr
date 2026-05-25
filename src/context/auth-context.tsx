@@ -76,13 +76,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await authService.login(credentials);
       if (response.success && response.data) {
-        const { access, refresh, user: loggedUser } = response.data;
+        const { access, refresh } = response.data;
         
         localStorage.setItem("admin_access_token", access);
         localStorage.setItem("admin_refresh_token", refresh);
-        localStorage.setItem("admin_user", JSON.stringify(loggedUser));
         
-        setUser(loggedUser);
+        // Fetch the latest profile immediately to ensure we have up-to-date info (like profile picture)
+        try {
+          const profileRes = await authService.getProfile();
+          if (profileRes.success && profileRes.data) {
+            const finalUser = { ...response.data.user, ...profileRes.data };
+            localStorage.setItem("admin_user", JSON.stringify(finalUser));
+            setUser(finalUser);
+          } else {
+            localStorage.setItem("admin_user", JSON.stringify(response.data.user));
+            setUser(response.data.user);
+          }
+        } catch (profileErr) {
+          // Fallback to login user data if profile fetch fails
+          localStorage.setItem("admin_user", JSON.stringify(response.data.user));
+          setUser(response.data.user);
+        }
+        
         router.push("/");
       } else {
         throw new Error(response.message || "Failed to sign in. Please try again.");
